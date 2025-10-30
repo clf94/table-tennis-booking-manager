@@ -140,11 +140,11 @@ export default function Reports() {
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <p className="text-sm text-gray-600">Table Earnings</p>
-              <p className="text-3xl font-bold text-gray-800 mt-2">${monthlyData.total_earnings.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-gray-800 mt-2">€{monthlyData.total_earnings.toFixed(2)}</p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <p className="text-sm text-gray-600">Total Revenue</p>
-              <p className="text-3xl font-bold text-green-600 mt-2">${monthlyData.total_revenue.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-green-600 mt-2">€{monthlyData.total_revenue.toFixed(2)}</p>
             </div>
           </div>
 
@@ -179,7 +179,7 @@ export default function Reports() {
               </div>
               <div>
                 <p className="text-sm text-gray-600">ABO Revenue</p>
-                <p className="text-2xl font-bold text-gray-800">${monthlyData.abo_revenue.toFixed(2)}</p>
+                <p className="text-2xl font-bold text-gray-800">€{monthlyData.abo_revenue.toFixed(2)}</p>
               </div>
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function Reports() {
               {trainerData.trainers.map((trainer) => (
                 <tr key={trainer.trainer_id}>
                   <td className="px-6 py-4 whitespace-nowrap font-medium">{trainer.trainer_name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">${trainer.hourly_rate.toFixed(2)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">€{trainer.hourly_rate.toFixed(2)}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{trainer.total_hours.toFixed(2)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-green-600 font-bold">
                     ${trainer.total_earnings.toFixed(2)}
@@ -224,7 +224,7 @@ export default function Reports() {
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <p className="text-sm text-gray-600">Monthly Rate</p>
-              <p className="text-3xl font-bold text-gray-800 mt-2">${aboData.monthly_rate.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-gray-800 mt-2">€{aboData.monthly_rate.toFixed(2)}</p>
             </div>
           </div>
 

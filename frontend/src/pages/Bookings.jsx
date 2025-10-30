@@ -190,7 +190,7 @@ export default function Bookings() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">{booking.duration} min</td>
                   <td className="px-6 py-4 whitespace-nowrap font-bold text-green-600">
-                    ${booking.price.toFixed(2)}
+                    €{booking.price.toFixed(2)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {booking.is_abo && (

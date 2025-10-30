@@ -129,7 +129,7 @@ export default function Trainers() {
               <tr key={trainer.id}>
                 <td className="px-6 py-4 whitespace-nowrap font-medium">{trainer.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{trainer.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">${trainer.hourly_rate.toFixed(2)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">€{trainer.hourly_rate.toFixed(2)}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex gap-2">
                     <button
@@ -186,7 +186,7 @@ export default function Trainers() {
               <div>
                 <label className="block text-sm font-medium mb-1">{t('hourlyRate')}</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <span className="absolute left-3 top-2 text-gray-500">€</span>
                   <input
                     type="number"
                     step="0.01"

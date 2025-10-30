@@ -92,13 +92,13 @@ export default function Dashboard() {
         />
         <StatCard
           title={t('totalEarnings') + ' (Today)'}
-          value={`$${stats.todayEarnings.toFixed(2)}`}
+          value={`€${stats.todayEarnings.toFixed(2)}`}
           icon={Euro}
           color="bg-green-500"
         />
         <StatCard
           title={t('earningsThisMonth')}
-          value={`$eur{stats.monthlyEarnings.toFixed(2)}`}
+          value={`€${stats.monthlyEarnings.toFixed(2)}`}
           icon={TrendingUp}
           color="bg-purple-500"
         />
