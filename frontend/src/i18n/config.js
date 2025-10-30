@@ -66,7 +66,8 @@ const resources = {
       sixty_no_trainer_no_abo: '60 min, No Trainer, No Subscription',
       sixty_no_trainer_abo: '60 min, No Trainer, With Subscription',
       sixty_trainer_no_abo: '60 min, With Trainer, No Subscription',
-      sixty_trainer_abo: '60 min, With Trainer, With Subscription'
+      sixty_trainer_abo: '60 min, With Trainer, With Subscription',
+      users: 'Users',
 	 } 
   },
   de: {
@@ -133,7 +134,8 @@ const resources = {
       sixty_no_trainer_no_abo: '60 Min, Ohne Trainer, Kein Abo',
       sixty_no_trainer_abo: '60 Min, Ohne Trainer, Mit Abo',
       sixty_trainer_no_abo: '60 Min, Mit Trainer, Kein Abo',
-      sixty_trainer_abo: '60 Min, Mit Trainer, Mit Abo'
+      sixty_trainer_abo: '60 Min, Mit Trainer, Mit Abo',
+	  users: 'Benutzer',
 
     }
   },
@@ -202,6 +204,7 @@ const resources = {
       sixty_no_trainer_abo: '60 мин, Без тренера, С абонементом',
       sixty_trainer_no_abo: '60 мин, С тренером, Без абонемента',
       sixty_trainer_abo: '60 мин, С тренером, С абонементом',
+	  users: 'Пользователи',
 
     }
   },
@@ -270,6 +273,7 @@ const resources = {
       sixty_no_trainer_abo: '60 min, Sin Entrenador, Con Abono',
       sixty_trainer_no_abo: '60 min, Con Entrenador, Sin Abono',
       sixty_trainer_abo: '60 min, Con Entrenador, Con Abono',
+	  users: 'Usuarios',
 
     }
   }

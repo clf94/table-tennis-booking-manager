@@ -78,28 +78,12 @@ export default function CalendarView() {
     }
   };
 
-const calculateEndTime = (date, time, duration) => {
-  if (!date || !time) {
-    console.warn('Invalid date or time:', date, time);
-    return null;
-  }
-
-  // Ensure hours are zero-padded (2:30 → 02:30)
-  let [hours, minutes] = time.split(':');
-  hours = hours.padStart(2, '0');
-  minutes = minutes.padStart(2, '0');
-
-  // Construct ISO string with 'T'
-  const start = new Date(`${date}T${hours}:${minutes}`);
-  if (isNaN(start.getTime())) {
-    console.warn('Invalid Date object for:', date, time);
-    return null;
-  }
-
-  start.setMinutes(start.getMinutes() + duration);
-  return start.toISOString();
-};
-
+  const calculateEndTime = (date, time, duration) => {
+    const [hours, minutes] = time.split(':');
+    const start = new Date(`${date}T${time}`);
+    start.setMinutes(start.getMinutes() + duration);
+    return start.toISOString();
+  };
 
   const handleDateClick = (info) => {
     if (!isAdmin()) return;
@@ -172,33 +156,151 @@ const calculateEndTime = (date, time, duration) => {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-4">
-      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">{t('calendar')}</h1>
+    <div>
+      <h1 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-6 lg:mb-8">{t('calendar')}</h1>
 
-      <div className="bg-white rounded-lg shadow p-4 sm:p-6 mb-6 overflow-x-auto">
-        <div className="mb-4 flex flex-wrap gap-2 sm:gap-4 text-sm">
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded"></div>
+      <div className="bg-white rounded-lg shadow p-3 lg:p-6">
+        <div className="mb-4 flex flex-wrap gap-2 lg:gap-4 text-xs lg:text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 lg:w-4 lg:h-4 bg-blue-500 rounded"></div>
             <span>{t('withoutTrainer')}</span>
           </div>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-amber-500 rounded"></div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 lg:w-4 lg:h-4 bg-amber-500 rounded"></div>
             <span>{t('withTrainer')}</span>
           </div>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded"></div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 lg:w-4 lg:h-4 bg-green-500 rounded"></div>
             <span>{t('aboHolder')}</span>
           </div>
         </div>
 
-        <div className="w-full">
+        {/* Calendar wrapper with responsive styles */}
+        <div className="calendar-wrapper">
+          <style>{`
+            .calendar-wrapper .fc {
+              font-size: 0.75rem;
+            }
+            
+            @media (min-width: 640px) {
+              .calendar-wrapper .fc {
+                font-size: 0.875rem;
+              }
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc {
+                font-size: 1rem;
+              }
+            }
+            
+            .calendar-wrapper .fc-toolbar {
+              flex-direction: column;
+              gap: 0.5rem;
+            }
+            
+            @media (min-width: 640px) {
+              .calendar-wrapper .fc-toolbar {
+                flex-direction: row;
+              }
+            }
+            
+            .calendar-wrapper .fc-toolbar-chunk {
+              display: flex;
+              justify-content: center;
+              margin: 0.25rem 0;
+            }
+            
+            .calendar-wrapper .fc-button {
+              padding: 0.25rem 0.5rem !important;
+              font-size: 0.75rem !important;
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc-button {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.875rem !important;
+              }
+            }
+            
+            .calendar-wrapper .fc-toolbar-title {
+              font-size: 1rem !important;
+            }
+            
+            @media (min-width: 640px) {
+              .calendar-wrapper .fc-toolbar-title {
+                font-size: 1.25rem !important;
+              }
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc-toolbar-title {
+                font-size: 1.5rem !important;
+              }
+            }
+            
+            .calendar-wrapper .fc-col-header-cell {
+              padding: 0.25rem !important;
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc-col-header-cell {
+                padding: 0.5rem !important;
+              }
+            }
+            
+            .calendar-wrapper .fc-daygrid-day {
+              min-height: 60px;
+            }
+            
+            @media (min-width: 640px) {
+              .calendar-wrapper .fc-daygrid-day {
+                min-height: 80px;
+              }
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc-daygrid-day {
+                min-height: 100px;
+              }
+            }
+            
+            .calendar-wrapper .fc-event {
+              font-size: 0.65rem;
+              padding: 1px 2px;
+            }
+            
+            @media (min-width: 640px) {
+              .calendar-wrapper .fc-event {
+                font-size: 0.75rem;
+                padding: 2px 4px;
+              }
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc-event {
+                font-size: 0.875rem;
+              }
+            }
+            
+            .calendar-wrapper .fc-timegrid-slot {
+              height: 2rem;
+            }
+            
+            @media (min-width: 1024px) {
+              .calendar-wrapper .fc-timegrid-slot {
+                height: 3rem;
+              }
+            }
+          `}</style>
+          
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="timeGridWeek"
+            initialView={window.innerWidth < 768 ? 'timeGridDay' : 'timeGridWeek'}
             headerToolbar={{
               left: 'prev,next today',
               center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              right: window.innerWidth < 640 ? 'timeGridDay' : 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
             events={events}
             dateClick={handleDateClick}
@@ -209,7 +311,7 @@ const calculateEndTime = (date, time, duration) => {
             slotMaxTime="22:00:00"
             height="auto"
             contentHeight="auto"
-            dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }}
+            aspectRatio={window.innerWidth < 768 ? 1 : 1.5}
           />
         </div>
       </div>
@@ -217,18 +319,18 @@ const calculateEndTime = (date, time, duration) => {
       {/* Booking Modal */}
       {showModal && isAdmin() && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4">
+          <div className="bg-white rounded-lg p-4 lg:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl lg:text-2xl font-bold mb-4">
               {selectedEvent ? t('editBooking') : t('newBooking')}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3 lg:space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">{t('customer')}</label>
                 <select
                   value={formData.customer_id}
-                  onChange={(e) => setFormData({ ...formData, customer_id: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                  onChange={(e) => setFormData({...formData, customer_id: e.target.value})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
                   required
                 >
                   <option value="">Select customer</option>
@@ -242,8 +344,8 @@ const calculateEndTime = (date, time, duration) => {
                 <label className="block text-sm font-medium mb-1">{t('trainer')}</label>
                 <select
                   value={formData.trainer_id}
-                  onChange={(e) => setFormData({ ...formData, trainer_id: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                  onChange={(e) => setFormData({...formData, trainer_id: e.target.value})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
                 >
                   <option value="">No trainer</option>
                   {trainers.map(t => (
@@ -256,8 +358,8 @@ const calculateEndTime = (date, time, duration) => {
                 <label className="block text-sm font-medium mb-1">{t('table')}</label>
                 <select
                   value={formData.table_id}
-                  onChange={(e) => setFormData({ ...formData, table_id: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                  onChange={(e) => setFormData({...formData, table_id: e.target.value})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
                   required
                 >
                   {tables.map(t => (
@@ -266,36 +368,34 @@ const calculateEndTime = (date, time, duration) => {
                 </select>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">{t('date')}</label>
-                  <input
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
-                    required
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">{t('date')}</label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => setFormData({...formData, date: e.target.value})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
+                  required
+                />
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">{t('time')}</label>
-                  <input
-                    type="time"
-                    value={formData.time}
-                    onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
-                    required
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">{t('time')}</label>
+                <input
+                  type="time"
+                  value={formData.time}
+                  onChange={(e) => setFormData({...formData, time: e.target.value})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
+                  required
+                />
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-1">{t('duration')}</label>
                 <select
                   value={formData.duration}
-                  onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                  onChange={(e) => setFormData({...formData, duration: parseInt(e.target.value)})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
                   required
                 >
                   <option value="30">30 {t('minutes')}</option>
@@ -307,23 +407,23 @@ const calculateEndTime = (date, time, duration) => {
                 <label className="block text-sm font-medium mb-1">{t('info')}</label>
                 <textarea
                   value={formData.info}
-                  onChange={(e) => setFormData({ ...formData, info: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                  onChange={(e) => setFormData({...formData, info: e.target.value})}
+                  className="w-full px-3 py-2 border rounded-lg text-sm lg:text-base"
                   rows="3"
                 />
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2 mt-2">
+              <div className="flex flex-col sm:flex-row gap-2 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 text-sm sm:text-base"
+                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 text-sm lg:text-base"
                 >
                   {t('save')}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 text-sm sm:text-base"
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 text-sm lg:text-base"
                 >
                   {t('cancel')}
                 </button>
@@ -331,7 +431,7 @@ const calculateEndTime = (date, time, duration) => {
                   <button
                     type="button"
                     onClick={handleDelete}
-                    className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 text-sm sm:text-base"
+                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm lg:text-base"
                   >
                     {t('delete')}
                   </button>

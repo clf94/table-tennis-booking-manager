@@ -250,7 +250,7 @@ def download_report():
                     b.table.name,
                     b.trainer.name if b.trainer else 'None',
                     f"{b.duration} min",
-                    f"${b.price:.2f}"
+                    f"€{b.price:.2f}"
                 ])
             
             output.seek(0)
@@ -282,7 +282,7 @@ def download_report():
                     b.table.name,
                     b.trainer.name if b.trainer else 'None',
                     f"{b.duration} min",
-                    f"${b.price:.2f}"
+                    f"€{b.price:.2f}"
                 ])
             
             output.seek(0)

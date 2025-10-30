@@ -11,6 +11,7 @@ import Customers from './pages/Customers';
 import Trainers from './pages/Trainers';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import Users from './pages/Users';
 
 function PrivateRoute({ children, adminOnly = false }) {
   const { user, loading, isAdmin } = useAuth();
@@ -78,6 +79,11 @@ function AppRoutes() {
         <Route path="settings" element={
           <PrivateRoute adminOnly>
             <Settings />
+          </PrivateRoute>
+        } />
+		<Route path="users" element={
+          <PrivateRoute adminOnly>
+            <Users />
           </PrivateRoute>
         } />
       </Route>

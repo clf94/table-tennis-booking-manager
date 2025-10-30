@@ -9,6 +9,7 @@ from routes.booking_routes import booking_bp
 from routes.report_routes import report_bp
 from routes.settings_routes import settings_bp
 from routes.table_routes import table_bp
+from routes.user_routes import user_bp
 from utils.seeder import seed_data
 
 app = Flask(__name__)
@@ -32,6 +33,7 @@ app.register_blueprint(booking_bp, url_prefix='/api/bookings')
 app.register_blueprint(report_bp, url_prefix='/api/reports')
 app.register_blueprint(settings_bp, url_prefix='/api/settings')
 app.register_blueprint(table_bp, url_prefix='/api/tables')
+app.register_blueprint(user_bp, url_prefix='/api/users')
 
 @app.route('/')
 def index():
