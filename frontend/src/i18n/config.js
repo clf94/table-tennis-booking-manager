@@ -58,8 +58,16 @@ const resources = {
       withTrainer: 'With Trainer',
       withoutTrainer: 'Without Trainer',
       noAbo: 'No ABO',
-      actions: 'Actions'
-    }
+      actions: 'Actions',
+	  thirty_no_trainer_no_abo: '30 min, No Trainer, No Subscription',
+      thirty_no_trainer_abo: '30 min, No Trainer, With Subscription',
+      thirty_trainer_no_abo: '30 min, With Trainer, No Subscription',
+      thirty_trainer_abo: '30 min, With Trainer, With Subscription',
+      sixty_no_trainer_no_abo: '60 min, No Trainer, No Subscription',
+      sixty_no_trainer_abo: '60 min, No Trainer, With Subscription',
+      sixty_trainer_no_abo: '60 min, With Trainer, No Subscription',
+      sixty_trainer_abo: '60 min, With Trainer, With Subscription'
+	 } 
   },
   de: {
     translation: {
@@ -117,7 +125,16 @@ const resources = {
       withTrainer: 'Mit Trainer',
       withoutTrainer: 'Ohne Trainer',
       noAbo: 'Kein ABO',
-      actions: 'Aktionen'
+      actions: 'Aktionen',
+	  thirty_no_trainer_no_abo: '30 Min, Ohne Trainer, Kein Abo',
+      thirty_no_trainer_abo: '30 Min, Ohne Trainer, Mit Abo',
+      thirty_trainer_no_abo: '30 Min, Mit Trainer, Kein Abo',
+      thirty_trainer_abo: '30 Min, Mit Trainer, Mit Abo',
+      sixty_no_trainer_no_abo: '60 Min, Ohne Trainer, Kein Abo',
+      sixty_no_trainer_abo: '60 Min, Ohne Trainer, Mit Abo',
+      sixty_trainer_no_abo: '60 Min, Mit Trainer, Kein Abo',
+      sixty_trainer_abo: '60 Min, Mit Trainer, Mit Abo'
+
     }
   },
   ru: {
@@ -176,7 +193,16 @@ const resources = {
       withTrainer: 'С тренером',
       withoutTrainer: 'Без тренера',
       noAbo: 'Без абонемента',
-      actions: 'Действия'
+      actions: 'Действия',
+	  thirty_no_trainer_no_abo: '30 мин, Без тренера, Без абонемента',
+      thirty_no_trainer_abo: '30 мин, Без тренера, С абонементом',
+      thirty_trainer_no_abo: '30 мин, С тренером, Без абонемента',
+      thirty_trainer_abo: '30 мин, С тренером, С абонементом',
+      sixty_no_trainer_no_abo: '60 мин, Без тренера, Без абонемента',
+      sixty_no_trainer_abo: '60 мин, Без тренера, С абонементом',
+      sixty_trainer_no_abo: '60 мин, С тренером, Без абонемента',
+      sixty_trainer_abo: '60 мин, С тренером, С абонементом',
+
     }
   },
   es: {
@@ -235,7 +261,16 @@ const resources = {
       withTrainer: 'Con entrenador',
       withoutTrainer: 'Sin entrenador',
       noAbo: 'Sin ABO',
-      actions: 'Acciones'
+      actions: 'Acciones',
+      thirty_no_trainer_no_abo: '30 min, Sin Entrenador, Sin Abono',
+      thirty_no_trainer_abo: '30 min, Sin Entrenador, Con Abono',
+      thirty_trainer_no_abo: '30 min, Con Entrenador, Sin Abono',
+      thirty_trainer_abo: '30 min, Con Entrenador, Con Abono',
+      sixty_no_trainer_no_abo: '60 min, Sin Entrenador, Sin Abono',
+      sixty_no_trainer_abo: '60 min, Sin Entrenador, Con Abono',
+      sixty_trainer_no_abo: '60 min, Con Entrenador, Sin Abono',
+      sixty_trainer_abo: '60 min, Con Entrenador, Con Abono',
+
     }
   }
 };

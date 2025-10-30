@@ -52,14 +52,14 @@ export default function Settings() {
   };
 
   const priceFields = [
-    { key: '30_no_trainer_no_abo', label: '30 min, No Trainer, No ABO' },
-    { key: '30_no_trainer_abo', label: '30 min, No Trainer, With ABO' },
-    { key: '30_trainer_no_abo', label: '30 min, With Trainer, No ABO' },
-    { key: '30_trainer_abo', label: '30 min, With Trainer, With ABO' },
-    { key: '60_no_trainer_no_abo', label: '60 min, No Trainer, No ABO' },
-    { key: '60_no_trainer_abo', label: '60 min, No Trainer, With ABO' },
-    { key: '60_trainer_no_abo', label: '60 min, With Trainer, No ABO' },
-    { key: '60_trainer_abo', label: '60 min, With Trainer, With ABO' },
+    { key: '30_no_trainer_no_abo', label: 'thirty_no_trainer_no_abo' },
+    { key: '30_no_trainer_abo', label: 'thirty_no_trainer_abo' },
+    { key: '30_trainer_no_abo', label: 'thirty_trainer_no_abo' },
+    { key: '30_trainer_abo', label: 'thirty_trainer_abo' },
+    { key: '60_no_trainer_no_abo', label: 'sixty_no_trainer_no_abo' },
+    { key: '60_no_trainer_abo', label: 'sixty_no_trainer_abo' },
+    { key: '60_trainer_no_abo', label: 'sixty_trainer_no_abo' },
+    { key: '60_trainer_abo', label: 'sixty_trainer_abo' },
   ];
 
   if (!settings) {
@@ -78,7 +78,7 @@ export default function Settings() {
         {priceFields.map((field) => (
           <div key={field.key}>
             <label className="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-              {field.label}
+              {t(field.label)}
             </label>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-500">€</span>
@@ -114,6 +114,8 @@ export default function Settings() {
         </div>
       </div>
     </div>
+
+
 
     {/* Save Button */}
     <div className="flex justify-end">
