@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -11,13 +11,16 @@ import {
   BarChart3, 
   Settings, 
   LogOut,
-  Globe
+  Globe,
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function Layout() {
   const { user, logout, isAdmin } = useAuth();
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navigation = [
     { name: t('dashboard'), path: '/', icon: LayoutDashboard, adminOnly: true },
@@ -38,23 +41,43 @@ export default function Layout() {
 
   return (
     <div className="flex h-screen bg-gray-100">
+      {/* Mobile Hamburger */}
+      <div className="md:hidden fixed top-4 left-4 z-50">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="p-2 bg-white rounded-lg shadow"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg">
-        <div className="p-6">
-          <h1 className="text-2xl font-bold text-gray-800">🏓 TT Booking</h1>
-          <p className="text-sm text-gray-600 mt-1">{user?.username}</p>
-          <p className="text-xs text-gray-500">{user?.role}</p>
+      <div
+        className={`fixed inset-y-0 left-0 bg-white shadow-lg w-64 transform transition-transform duration-300
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static md:flex md:flex-col`}
+      >
+        <div className="p-6 flex justify-between items-center md:block">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800">🏓 TT Booking</h1>
+            <p className="text-sm text-gray-600 mt-1">{user?.username}</p>
+            <p className="text-xs text-gray-500">{user?.role}</p>
+          </div>
+          <div className="md:hidden">
+            <button onClick={() => setSidebarOpen(false)}>
+              <X className="w-6 h-6" />
+            </button>
+          </div>
         </div>
 
-        <nav className="mt-6">
+        <nav className="mt-6 flex-1 overflow-auto">
           {filteredNav.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
-            
             return (
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={() => setSidebarOpen(false)}
                 className={`flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors ${
                   isActive ? 'bg-blue-50 text-blue-600 border-r-4 border-blue-600' : ''
                 }`}
@@ -66,7 +89,7 @@ export default function Layout() {
           })}
         </nav>
 
-        <div className="absolute bottom-0 w-64 p-6 border-t">
+        <div className="p-6 border-t md:border-t mt-auto">
           {/* Language Selector */}
           <div className="mb-4">
             <div className="flex items-center mb-2 text-sm text-gray-600">
@@ -101,7 +124,7 @@ export default function Layout() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto ml-0 md:ml-64">
         <div className="p-8">
           <Outlet />
         </div>

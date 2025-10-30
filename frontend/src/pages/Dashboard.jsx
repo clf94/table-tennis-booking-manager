@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import client from '../api/client';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { DollarSign, Calendar, Users, TrendingUp } from 'lucide-react';
+import { DollarSign, Calendar, Users, TrendingUp, Euro } from 'lucide-react';
 
 export default function Dashboard() {
   const { t } = useTranslation();
@@ -93,7 +93,7 @@ export default function Dashboard() {
         <StatCard
           title={t('totalEarnings') + ' (Today)'}
           value={`$${stats.todayEarnings.toFixed(2)}`}
-          icon={DollarSign}
+          icon={Euro}
           color="bg-green-500"
         />
         <StatCard
@@ -122,7 +122,7 @@ export default function Dashboard() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="earnings" fill="#3b82f6" name="Earnings ($)" />
+            <Bar dataKey="earnings" fill="#3b82f6" name="Earnings (€)" />
           </BarChart>
         </ResponsiveContainer>
       </div>

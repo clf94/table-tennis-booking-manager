@@ -67,85 +67,66 @@ export default function Settings() {
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">{t('settings')}</h1>
+    <div className="px-4 sm:px-6 lg:px-8 py-4">
+  <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">{t('settings')}</h1>
 
-      <div className="space-y-6">
-        {/* Pricing Matrix */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold mb-4">{t('pricingMatrix')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {priceFields.map((field) => (
-              <div key={field.key}>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {field.label}
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-500">$</span>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={pricingMatrix[field.key] || 0}
-                    onChange={(e) => updatePrice(field.key, e.target.value)}
-                    className="w-full pl-8 pr-4 py-2 border rounded-lg"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Monthly Rate */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold mb-4">{t('monthlyRate')}</h2>
-          <div className="max-w-xs">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              ABO Monthly Subscription Rate
+  <div className="space-y-6">
+    {/* Pricing Matrix */}
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <h2 className="text-lg sm:text-xl font-bold mb-4">{t('pricingMatrix')}</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {priceFields.map((field) => (
+          <div key={field.key}>
+            <label className="block text-sm sm:text-base font-medium text-gray-700 mb-2">
+              {field.label}
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-2 text-gray-500">$</span>
+              <span className="absolute left-3 top-2 text-gray-500">€</span>
               <input
                 type="number"
                 step="0.01"
-                value={monthlyRate}
-                onChange={(e) => setMonthlyRate(parseFloat(e.target.value) || 0)}
-                className="w-full pl-8 pr-4 py-2 border rounded-lg"
+                value={pricingMatrix[field.key] || 0}
+                onChange={(e) => updatePrice(field.key, e.target.value)}
+                className="w-full pl-8 pr-4 py-2 border rounded-lg text-sm sm:text-base"
               />
             </div>
           </div>
-        </div>
+        ))}
+      </div>
+    </div>
 
-        {/* Language */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold mb-4">{t('language')}</h2>
-          <div className="max-w-xs">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Default Language
-            </label>
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg"
-            >
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-              <option value="ru">Русский</option>
-              <option value="es">Español</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Save Button */}
-        <div className="flex justify-end">
-          <button
-            onClick={handleSave}
-            disabled={saving}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
-          >
-            {saving ? 'Saving...' : t('save')}
-          </button>
+    {/* Monthly Rate */}
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <h2 className="text-lg sm:text-xl font-bold mb-4">{t('monthlyRate')}</h2>
+      <div className="max-w-xs">
+        <label className="block text-sm sm:text-base font-medium text-gray-700 mb-2">
+          ABO Monthly Subscription Rate
+        </label>
+        <div className="relative">
+          <span className="absolute left-3 top-2 text-gray-500">€</span>
+          <input
+            type="number"
+            step="0.01"
+            value={monthlyRate}
+            onChange={(e) => setMonthlyRate(parseFloat(e.target.value) || 0)}
+            className="w-full pl-8 pr-4 py-2 border rounded-lg text-sm sm:text-base"
+          />
         </div>
       </div>
     </div>
+
+    {/* Save Button */}
+    <div className="flex justify-end">
+      <button
+        onClick={handleSave}
+        disabled={saving}
+        className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 text-sm sm:text-base"
+      >
+        {saving ? 'Saving...' : t('save')}
+      </button>
+    </div>
+  </div>
+</div>
+
   );
 }

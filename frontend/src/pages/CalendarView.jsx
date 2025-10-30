@@ -172,59 +172,63 @@ const calculateEndTime = (date, time, duration) => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">{t('calendar')}</h1>
+    <div className="px-4 sm:px-6 lg:px-8 py-4">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">{t('calendar')}</h1>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="mb-4 flex gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-blue-500 rounded"></div>
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6 mb-6 overflow-x-auto">
+        <div className="mb-4 flex flex-wrap gap-2 sm:gap-4 text-sm">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded"></div>
             <span>{t('withoutTrainer')}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-amber-500 rounded"></div>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-amber-500 rounded"></div>
             <span>{t('withTrainer')}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-green-500 rounded"></div>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded"></div>
             <span>{t('aboHolder')}</span>
           </div>
         </div>
 
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="timeGridWeek"
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-          }}
-          events={events}
-          dateClick={handleDateClick}
-          eventClick={handleEventClick}
-          editable={isAdmin()}
-          selectable={isAdmin()}
-          slotMinTime="08:00:00"
-          slotMaxTime="22:00:00"
-          height="auto"
-        />
+        <div className="w-full">
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            initialView="timeGridWeek"
+            headerToolbar={{
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            }}
+            events={events}
+            dateClick={handleDateClick}
+            eventClick={handleEventClick}
+            editable={isAdmin()}
+            selectable={isAdmin()}
+            slotMinTime="08:00:00"
+            slotMaxTime="22:00:00"
+            height="auto"
+            contentHeight="auto"
+            dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }}
+          />
+        </div>
       </div>
 
       {/* Booking Modal */}
       {showModal && isAdmin() && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold mb-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">
               {selectedEvent ? t('editBooking') : t('newBooking')}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">{t('customer')}</label>
                 <select
                   value={formData.customer_id}
-                  onChange={(e) => setFormData({...formData, customer_id: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  onChange={(e) => setFormData({ ...formData, customer_id: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
                   required
                 >
                   <option value="">Select customer</option>
@@ -238,8 +242,8 @@ const calculateEndTime = (date, time, duration) => {
                 <label className="block text-sm font-medium mb-1">{t('trainer')}</label>
                 <select
                   value={formData.trainer_id}
-                  onChange={(e) => setFormData({...formData, trainer_id: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  onChange={(e) => setFormData({ ...formData, trainer_id: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
                 >
                   <option value="">No trainer</option>
                   {trainers.map(t => (
@@ -252,8 +256,8 @@ const calculateEndTime = (date, time, duration) => {
                 <label className="block text-sm font-medium mb-1">{t('table')}</label>
                 <select
                   value={formData.table_id}
-                  onChange={(e) => setFormData({...formData, table_id: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  onChange={(e) => setFormData({ ...formData, table_id: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
                   required
                 >
                   {tables.map(t => (
@@ -262,34 +266,36 @@ const calculateEndTime = (date, time, duration) => {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">{t('date')}</label>
-                <input
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => setFormData({...formData, date: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
-              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">{t('date')}</label>
+                  <input
+                    type="date"
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                    className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">{t('time')}</label>
-                <input
-                  type="time"
-                  value={formData.time}
-                  onChange={(e) => setFormData({...formData, time: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
+                <div>
+                  <label className="block text-sm font-medium mb-1">{t('time')}</label>
+                  <input
+                    type="time"
+                    value={formData.time}
+                    onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                    className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
+                    required
+                  />
+                </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-1">{t('duration')}</label>
                 <select
                   value={formData.duration}
-                  onChange={(e) => setFormData({...formData, duration: parseInt(e.target.value)})}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
+                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
                   required
                 >
                   <option value="30">30 {t('minutes')}</option>
@@ -301,23 +307,23 @@ const calculateEndTime = (date, time, duration) => {
                 <label className="block text-sm font-medium mb-1">{t('info')}</label>
                 <textarea
                   value={formData.info}
-                  onChange={(e) => setFormData({...formData, info: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  onChange={(e) => setFormData({ ...formData, info: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg text-sm sm:text-base"
                   rows="3"
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2 mt-2">
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 text-sm sm:text-base"
                 >
                   {t('save')}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 text-sm sm:text-base"
                 >
                   {t('cancel')}
                 </button>
@@ -325,7 +331,7 @@ const calculateEndTime = (date, time, duration) => {
                   <button
                     type="button"
                     onClick={handleDelete}
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                    className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 text-sm sm:text-base"
                   >
                     {t('delete')}
                   </button>
