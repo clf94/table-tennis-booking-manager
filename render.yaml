@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: table-tennis-booking-manager
+    env: python
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+      cd ..
+      pip install -r backend/requirements.txt
+      mkdir -p backend/build
+      cp -r frontend/dist/* backend/build/
+    startCommand: |
+      cd backend
+      python app.py
+    envVars:
+      - key: PORT
+        value: 5008
