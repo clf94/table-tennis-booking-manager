@@ -24,7 +24,15 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 86400  # 24 hours
 
 # Initialize extensions
 db.init_app(app)
-CORS(app, origins=["https://table-tennis-frontend.onrender.com"])
+CORS(
+    app,
+    resources={r"/api/*": {"origins": [
+        "http://localhost:5173",
+        "https://table-tennis-booking-manager.onrender.com"
+    ]}},
+    supports_credentials=True
+)
+
 jwt = JWTManager(app)
 
 # Register blueprints

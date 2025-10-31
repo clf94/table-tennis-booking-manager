@@ -115,7 +115,7 @@ export default function Bookings() {
               onChange={(e) => setFilterTable(e.target.value)}
               className="w-full px-4 py-2 border rounded-lg"
             >
-              <option value="">All Tables</option>
+              <option value="">{t('all_tables')}</option>
               {tables.map(t => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
@@ -128,8 +128,8 @@ export default function Bookings() {
               onChange={(e) => setFilterTrainer(e.target.value)}
               className="w-full px-4 py-2 border rounded-lg"
             >
-              <option value="">All Trainers</option>
-              <option value="none">No Trainer</option>
+              <option value="">{t('all_trainers')}</option>
+              <option value="none">{t('no_trainer')}</option>
               {trainers.map(t => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
@@ -141,17 +141,17 @@ export default function Bookings() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-600">Total Bookings</p>
+          <p className="text-sm text-gray-600"> {t('total_bookings')}</p>
           <p className="text-3xl font-bold text-gray-800 mt-2">{filteredBookings.length}</p>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-600">With Trainer</p>
+          <p className="text-sm text-gray-600">{t('withTrainer')}</p>
           <p className="text-3xl font-bold text-gray-800 mt-2">
             {filteredBookings.filter(b => b.trainer_id).length}
           </p>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-600">ABO Holders</p>
+          <p className="text-sm text-gray-600">{t('aboHolder')}</p>
           <p className="text-3xl font-bold text-gray-800 mt-2">
             {filteredBookings.filter(b => b.is_abo).length}
           </p>
@@ -208,7 +208,7 @@ export default function Bookings() {
 
       {filteredBookings.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          No bookings found
+          {t('no_bookings_found')}
         </div>
       )}
     </div>

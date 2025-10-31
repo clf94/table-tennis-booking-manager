@@ -113,7 +113,7 @@ export default function Dashboard() {
       {/* Earnings Chart */}
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-bold text-gray-800 mb-4">
-          {t('earningsThisMonth')} by Table
+          {t('earningsThisMonth')} x {t('table')}
         </h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={monthlyData}>

@@ -100,7 +100,7 @@ export default function Settings() {
       <h2 className="text-lg sm:text-xl font-bold mb-4">{t('monthlyRate')}</h2>
       <div className="max-w-xs">
         <label className="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-          ABO Monthly Subscription Rate
+          {t('abo')} 
         </label>
         <div className="relative">
           <span className="absolute left-3 top-2 text-gray-500">€</span>

@@ -79,10 +79,26 @@ export default function CalendarView() {
   };
 
   const calculateEndTime = (date, time, duration) => {
-    const [hours, minutes] = time.split(':');
-    const start = new Date(`${date}T${time}`);
-    start.setMinutes(start.getMinutes() + duration);
-    return start.toISOString();
+    try {
+      // Handle date that might already be a string or Date object
+      const dateStr = typeof date === 'string' ? date : date.toISOString().split('T')[0];
+      const timeStr = typeof time === 'string' ? time : time;
+      
+      // Create date object
+      const start = new Date(`${dateStr}T${timeStr}`);
+      
+      // Check if date is valid
+      if (isNaN(start.getTime())) {
+        return new Date().toISOString(); // Return current time as fallback
+      }
+      
+      // Add duration
+      start.setMinutes(start.getMinutes() + duration);
+      return start.toISOString();
+    } catch (error) {
+      console.error('Error calculating end time:', error);
+      return new Date().toISOString(); // Fallback
+    }
   };
 
   const handleDateClick = (info) => {

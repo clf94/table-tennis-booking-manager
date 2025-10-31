@@ -135,22 +135,22 @@ export default function Reports() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-sm text-gray-600">Total Bookings</p>
+              <p className="text-sm text-gray-600">{t('total_bookings')}</p>
               <p className="text-3xl font-bold text-gray-800 mt-2">{monthlyData.total_bookings}</p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-sm text-gray-600">Table Earnings</p>
+              <p className="text-sm text-gray-600">{t('table_earnings')}</p>
               <p className="text-3xl font-bold text-gray-800 mt-2">€{monthlyData.total_earnings.toFixed(2)}</p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-sm text-gray-600">Total Revenue</p>
+              <p className="text-sm text-gray-600">{t('total_revenue')}</p>
               <p className="text-3xl font-bold text-green-600 mt-2">€{monthlyData.total_revenue.toFixed(2)}</p>
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Earnings by Table</h2>
+              <h2 className="text-xl font-bold">{t('earnings_by_table')}Earnings by Table</h2>
               <button
                 onClick={() => handleDownload('monthly', 'csv')}
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -171,14 +171,14 @@ export default function Reports() {
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold mb-4">ABO Statistics</h2>
+            <h2 className="text-xl font-bold mb-4">{t('subscriptions_statistics')}</h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-600">Subscriptions Sold</p>
+                <p className="text-sm text-gray-600">{t('subscriptions_sold')}</p>
                 <p className="text-2xl font-bold text-gray-800">{monthlyData.abo_subscriptions_sold}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">ABO Revenue</p>
+                <p className="text-sm text-gray-600">{t('subscriptions_revenue')}</p>
                 <p className="text-2xl font-bold text-gray-800">€{monthlyData.abo_revenue.toFixed(2)}</p>
               </div>
             </div>
