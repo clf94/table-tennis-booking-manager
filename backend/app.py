@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
 from models import db
 from routes.auth_routes import auth_bp
 from routes.customer_routes import customer_bp
@@ -15,12 +16,20 @@ import os
 from flask import send_from_directory
 
 app = Flask(__name__, static_folder='dist', static_url_path='')
-
+load_dotenv()
 # Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tabletennis.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'your-secret-key-change-in-production'
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 86400  # 24 hours
+
+# Use Supabase Postgres i
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Add SSL only if DATABASE_URL contains Supabase
+if app.config['SQLALCHEMY_DATABASE_URI'] and "supabase.co" in app.config['SQLALCHEMY_DATABASE_URI']:
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+        "connect_args": {"sslmode": "require"}
+    }
 
 # Initialize extensions
 db.init_app(app)
