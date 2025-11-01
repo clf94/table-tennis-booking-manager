@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-500 via-teal-500 to-blue-600 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">🏓</h1>
@@ -73,11 +73,7 @@ export default function Login() {
             {t('login')}
           </button>
         </form>
-        
-        <div className="mt-6 text-sm text-gray-600 text-center">
-          <p>Default credentials:</p>
-          <p className="font-mono">admin / admin</p>
-        </div>
+       
       </div>
     </div>
   );
