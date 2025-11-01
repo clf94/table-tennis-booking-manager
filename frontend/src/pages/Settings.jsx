@@ -17,6 +17,8 @@ export default function Settings() {
   // Missing state variables for table modal
   const [showTableModal, setShowTableModal] = useState(false);
   const [selectedTable, setSelectedTable] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [tableToDelete, setTableToDelete] = useState(null);
 
   useEffect(() => {
     fetchSettings();
@@ -51,12 +53,18 @@ export default function Settings() {
   };
 
   const handleDeleteTable = async (id) => {
-    if (!confirm('Delete this table? All bookings for this table will be deleted too.')) return;
+    setTableToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteTable = async () => {
     try {
-      await client.delete(`/tables/${id}`);
+      await client.delete(`/tables/${tableToDelete}`);
       fetchTables();
+      setShowDeleteModal(false);
+      setTableToDelete(null);
     } catch (error) {
-      alert('Failed to delete table');
+      alert(t('deleteTableError'));
     }
   };
   
@@ -124,13 +132,13 @@ export default function Settings() {
         {/* Table Management */}
         <div className="bg-white rounded-lg shadow p-4 lg:p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg lg:text-xl font-bold">Table Management</h2>
+            <h2 className="text-lg lg:text-xl font-bold">{t('tableManagement')}</h2>
             <button
               onClick={() => { setSelectedTable(null); setTableName(''); setShowTableModal(true); }}
               className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm lg:text-base"
             >
               <Plus className="w-4 h-4" />
-              Add Table
+              {t('addTable')}
             </button>
           </div>
           
@@ -219,7 +227,7 @@ export default function Settings() {
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold">
-                {selectedTable ? 'Edit Table' : 'Add New Table'}
+                {selectedTable ? t('editTable') : t('addNewTable')}
               </h3>
               <button
                 onClick={() => {
@@ -233,41 +241,86 @@ export default function Settings() {
               </button>
             </div>
             
-            <form onSubmit={handleTableSubmit}>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Table Name
-                </label>
-                <input
-                  type="text"
-                  value={tableName}
-                  onChange={(e) => setTableName(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                  placeholder="e.g., Table 3"
-                  required
-                />
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {t('tableName')}
+              </label>
+              <input
+                type="text"
+                value={tableName}
+                onChange={(e) => setTableName(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleTableSubmit(e);
+                  }
+                }}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder={t('tableNamePlaceholder')}
+              />
+            </div>
+            
+            <div className="flex gap-3 justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowTableModal(false);
+                  setTableName('');
+                  setSelectedTable(null);
+                }}
+                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+              >
+                {t('cancel')}
+              </button>
+              <button
+                type="button"
+                onClick={handleTableSubmit}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                disabled={!tableName.trim()}
+              >
+                {selectedTable ? t('update') : t('create')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div className="flex items-start mb-4">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mr-4">
+                <Trash2 className="w-6 h-6 text-red-600" />
               </div>
-              
-              <div className="flex gap-3 justify-end">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowTableModal(false);
-                    setTableName('');
-                    setSelectedTable(null);
-                  }}
-                  className="px-4 py-2 border rounded-lg hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                >
-                  {selectedTable ? 'Update' : 'Create'}
-                </button>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {t('deleteTable')}
+                </h3>
+                <p className="text-gray-600">
+                  {t('deleteTableConfirm')}
+                </p>
               </div>
-            </form>
+            </div>
+            
+            <div className="flex gap-3 justify-end mt-6">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setTableToDelete(null);
+                }}
+                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+              >
+                {t('cancel')}
+              </button>
+              <button
+                type="button"
+                onClick={confirmDeleteTable}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              >
+                {t('delete')}
+              </button>
+            </div>
           </div>
         </div>
       )}

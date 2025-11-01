@@ -85,7 +85,16 @@ const resources = {
       earnings_by_table: 'Earnings by Table',
       subscriptions_statistics: 'Subscriptions Statistics',
       subscriptions_sold: 'Subscriptions Sold',
-      subscriptions_revenue: 'Subscriptions Revenue'
+      subscriptions_revenue: 'Subscriptions Revenue',
+	  tableManagement: 'Table Management',
+      addTable: 'Add Table',
+      editTable: 'Edit Table',
+      addNewTable: 'Add New Table',
+      tableName: 'Table Name',
+      tableNamePlaceholder: 'e.g., Table 3',
+      deleteTable: 'Delete Table',
+      deleteTableConfirm: 'Delete this table? All bookings for this table will be permanently deleted.',
+      deleteTableError: 'Failed to delete table',
 
 
     }
@@ -173,7 +182,16 @@ const resources = {
       earnings_by_table: 'Einnahmen nach Tisch',
       subscriptions_statistics: 'Abonnementstatistik',
       subscriptions_sold: 'Verkaufte Abonnements',
-      subscriptions_revenue: 'Abonnement-Einnahmen'
+      subscriptions_revenue: 'Abonnement-Einnahmen',
+	  tableManagement: 'Tischverwaltung',
+      addTable: 'Tisch hinzufügen',
+      editTable: 'Tisch bearbeiten',
+      addNewTable: 'Neuen Tisch hinzufügen',
+      tableName: 'Tischname',
+      tableNamePlaceholder: 'z.B. Tisch 3',
+      deleteTable: 'Tisch löschen',
+      deleteTableConfirm: 'Diesen Tisch löschen? Alle Buchungen für diesen Tisch werden dauerhaft gelöscht.',
+      deleteTableError: 'Fehler beim Löschen des Tisches',
 
 
     }
@@ -261,7 +279,16 @@ const resources = {
       earnings_by_table: 'Заработок по столам',
       subscriptions_statistics: 'Статистика подписок',
       subscriptions_sold: 'Проданные подписки',
-      subscriptions_revenue: 'Доход от подписок'
+      subscriptions_revenue: 'Доход от подписок',
+	  tableManagement: 'Управление столами',
+      addTable: 'Добавить стол',
+      editTable: 'Редактировать стол',
+      addNewTable: 'Добавить новый стол',
+      tableName: 'Название стола',
+      tableNamePlaceholder: 'например, Стол 3',
+      deleteTable: 'Удалить стол',
+      deleteTableConfirm: 'Удалить этот стол? Все бронирования для этого стола будут удалены навсегда.',
+      deleteTableError: 'Не удалось удалить стол',
 
 
     }
@@ -355,7 +382,16 @@ const resources = {
       earnings_by_table: 'Ingresos por mesa',
       subscriptions_statistics: 'Estadísticas de suscripciones',
       subscriptions_sold: 'Suscripciones vendidas',
-      subscriptions_revenue: 'Ingresos por suscripciones'
+      subscriptions_revenue: 'Ingresos por suscripciones',
+      tableManagement: 'Gestión de Mesas',
+      addTable: 'Añadir Mesa',
+      editTable: 'Editar Mesa',
+      addNewTable: 'Añadir Nueva Mesa',
+      tableName: 'Nombre de la Mesa',
+      tableNamePlaceholder: 'ej., Mesa 3',
+      deleteTable: 'Eliminar Mesa',
+      deleteTableConfirm: '¿Eliminar esta mesa? Todas las reservas de esta mesa se eliminarán permanentemente.',
+      deleteTableError: 'Error al eliminar la mesa',
 
 
     }
